@@ -21,13 +21,15 @@ import axios from 'axios';
 import { doc, setDoc } from "firebase/firestore";
 import { db } from '@/service/FirebaseConfig';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { useNavigate } from 'react-router-dom';
 
 function CreateTrip() {
   const [place, setPlace] = useState();
   const [FormData, setFormData] = useState([]);
   const [openDialog, setopenDialog] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
   const [loading,setloading] = useState(false);
+  const navigate=useNavigate();
 
   const handleInputChange = (name, value) => {
     setFormData({
@@ -88,6 +90,7 @@ function CreateTrip() {
       id:docId
     });
     setloading(false);
+    navigate('/view-trip/'+docId)
   }
 
 // to check user's authentication in JSON format
