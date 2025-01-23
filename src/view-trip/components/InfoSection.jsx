@@ -1,11 +1,32 @@
- import React from 'react'
+ import React, { useEffect } from 'react'
  import { IoIosSend } from "react-icons/io";
  import { Button } from '@/components/ui/button';
+ import { GetPlaceDetails } from '@/service/GlobalApi';
+ import { useState } from 'react';
+ import { PHOTO_REF_URL } from '@/service/GlobalApi';
+
+//  const PHOTO_REF_URL='https://places.googleapis.com/v1/{NAME}/media?maxHeightPx=1000&maxWidthPx=1000&key='+import.meta.env.VITE_GOOGLE_PLACE_API_KEY
  
  function InfoSection({trip}) {
+  const[photourl,setphotourl] = useState();
+  useEffect(()=>{
+    trip&&GetPlacePhoto()
+  },[trip])
+
+  const GetPlacePhoto=async ()=>{
+    const data={
+      textQuery:trip?.userSelection?.location?.label
+    }
+    const result = await GetPlaceDetails(data).then(Resp=>{
+      console.log(Resp.data.places[0].photos[3].name)
+      const PhotoUrl=PHOTO_REF_URL.replace('{NAME}',Resp.data.places[0].photos[3].name)
+      setphotourl(PhotoUrl);
+    })
+  }
+
    return (
      <div>
-        <img src='/placeholder.jpg' className='h-[340px] w-full object-cover rounded-xl'/>
+        <img src={photourl} className='h-[340px] w-full object-cover rounded-xl'/>
         <div className='flex justify-between items-center'>
         <div className='my-5 flex flex-col gap-2'>      
             <h2 className='font-bold text-2xl'>

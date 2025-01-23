@@ -7,7 +7,7 @@ function PlacesToVisit({trip}) {
         <h2 className='font-bold text-lg'>Places to Visit</h2>
         <div>
             {trip?.tripData?.itinerary && Object.entries(trip.tripData.itinerary).map(([key, item],index)=>(
-                <div className='mt-5'>
+                <div className='mt-5' key={index}>
                     <h2 className='font-medium text-lg'>{key}</h2>
                     <h2 className='font-medium text-sm text-orange-600'>Best Time to Visit: {item.bestTimeToVisit}</h2>
                     <div className='grid md:grid-cols-2 gap-5'>
