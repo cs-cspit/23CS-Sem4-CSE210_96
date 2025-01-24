@@ -18,10 +18,10 @@ function HotelCardItem({ hotel }) {
       const result = await GetPlaceDetails(data).then(Resp=>{
         console.log(Resp.data.places[0].photos[3].name)
         const Photourl=PHOTO_REF_URL.replace('{NAME}',Resp.data.places[0].photos[3].name)
-        setphotourl(Photourl);
-        
+        setphotourl(Photourl);        
       })
     }
+    
     return (
         <Link to={'https://www.google.com/maps/search/?api=1&query=' + hotel?.hotelName + "," + hotel?.hotelAddress} target='_blank'>
             <div className='hover:scale-105 transition-all cursor-pointer mt-4'>
