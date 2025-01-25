@@ -18,14 +18,15 @@ import { useState } from 'react';
 import { useGoogleLogin } from '@react-oauth/google';
 import { FcGoogle } from "react-icons/fc";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
   const [openDialog, setopenDialog] = useState(false);
   const user = JSON.parse(localStorage.getItem('user'));
 
-  // useEffect(() => {
-  //   console.log(user)
-  // }, [])
+  const closeDialog = () => {
+    setopenDialog(false);
+  };
 
   const login = useGoogleLogin({
     onSuccess: (response) => {
@@ -61,42 +62,46 @@ function Header() {
 
   return (
     <div className='p-3 shadow-sm flex justify-between items-center w-full px-50'>
-      <img src='/logo.svg' />
+      <a href='/'>
+      <img src='/Logo.png' className='border rounded-full w-20 ml-8' />
+      </a>
       {/* ternary operator */}
       <div>
         {
-          user ?
+          user && (
             <div className='flex items-center gap-3'>
-              <a href='/create-trip'>
-              <Button variant="outline" className="rounded-full">+ Create Trip</Button>
-              </a>
-              <a href='/my-trips'>
-              <Button variant="outline" className="rounded-full">My Trips</Button>
-              </a>
-              <Popover>
-                <PopoverTrigger>
-                <img src={user?.picture} className='h-[35px] w-[35px] rounded-full' />
-                </PopoverTrigger>
-                <PopoverContent>
-                  <h2 className='cursor-pointer rounded-lg' onClick={()=>{
-                    googleLogout();
-                    localStorage.clear();
-                    window.location.reload();
-                  }}>LogOut</h2>
-                </PopoverContent>
-              </Popover>
-            </div>
-            :
-            <Button onClick={()=>setopenDialog(true)}>Sign in </Button>
+            <a href='/create-trip'>
+            <Button variant="outline" className="rounded-full">+ Create Trip</Button>
+            </a>
+            <a href='/my-trips'>
+            <Button variant="outline" className="rounded-full">My Trips</Button>
+            </a>
+            <Popover>
+              <PopoverTrigger>
+              <img src={user?.picture} className='h-[35px] w-[35px] rounded-full' />
+              </PopoverTrigger>
+              <PopoverContent>
+                <h2 className='cursor-pointer rounded-lg' onClick={()=>{
+                  googleLogout();
+                  localStorage.clear();
+                  window.location.reload();
+                }}>LogOut</h2>
+              </PopoverContent>
+            </Popover>
+          </div>
+          )
         }
+        {!user && (
+          <Button onClick={()=>setopenDialog(true)}>Sign in </Button>
+        )}
       </div>
 
-      <Dialog open={openDialog}>  
+      <Dialog open={openDialog} onOpenChange={setopenDialog}>  
         <DialogContent>
           <DialogHeader>
           {/* <DialogTitle>Google Account Sign In</DialogTitle> */}
             <DialogDescription>
-              <img src="/logo.svg"/>
+              <img src="/Logo.png"/>
               <h2 className='font-bold text-lg mt-7'>Sign In With Google</h2>
               <p>Sign in to the App with Google Authentication Securely</p>
 
@@ -106,7 +111,6 @@ function Header() {
               <FcGoogle className='h-7 w-7'/>
               Sign In With Google
               </Button>
-
             </DialogDescription>
           </DialogHeader>
         </DialogContent>
