@@ -29,19 +29,20 @@ function InfoSection({ trip }) {
   }
 
   return (
-    <div>
-      <img src={photourl} className='h-[340px] w-full object-cover rounded-xl' />
-      <div className='flex justify-between items-center'>
-        <div className='my-5 flex flex-col gap-2'>
-          <h2 className='font-bold text-2xl'>
+    <div className='px-4 sm:px-0'>
+      <img src={photourl} className='h-[200px] sm:h-[250px] md:h-[340px] w-full object-cover rounded-xl' />
+      <div className='flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 sm:gap-0'>
+        <div className='my-3 sm:my-5 flex flex-col gap-2'>
+          <h2 className='font-bold text-xl sm:text-2xl'>
             {trip?.userSelection?.location?.label}
           </h2>
-          <div className='flex gap-5'>
-            <h2 className='p-1 px-3 bg-gray-200 rounded-full text-gray-500 text-xs md:text-md'> 📅 {trip.userSelection?.noOfDays} Day</h2>
-            <h2 className='p-1 px-3 bg-gray-200 rounded-full text-gray-500 text-xs md:text-md'> 💰 {trip.userSelection?.budget} Budget</h2>
-            <h2 className='p-1 px-3 bg-gray-200 rounded-full text-gray-500 text-xs md:text-md'> 🥂  No. of Traveler: {trip.userSelection?.traveler}</h2>
+          <div className='flex flex-wrap gap-2 sm:gap-5'>
+            <h2 className='p-1 px-3 bg-gray-200 rounded-full text-gray-500 text-xs md:text-sm'> 📅 {trip.userSelection?.noOfDays} Day</h2>
+            <h2 className='p-1 px-3 bg-gray-200 rounded-full text-gray-500 text-xs md:text-sm'> 💰 {trip.userSelection?.budget} Budget</h2>
+            <h2 className='p-1 px-3 bg-gray-200 rounded-full text-gray-500 text-xs md:text-sm'> 🥂  No. of Traveler: {trip.userSelection?.traveler}</h2>
           </div>
         </div>
+        <div className='self-center sm:self-auto'>
         {navigator.share ? (
           <RWebShare
             data={{
@@ -58,6 +59,7 @@ function InfoSection({ trip }) {
             <IoIosSend />
           </Button>
         )}
+        </div>
       </div>
     </div>
   )

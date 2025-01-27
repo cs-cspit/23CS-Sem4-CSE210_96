@@ -61,9 +61,9 @@ function Header() {
   };
 
   return (
-    <div className='p-3 shadow-sm flex justify-between items-center w-full px-50'>
+    <div className='p-3 shadow-sm flex justify-between items-center w-full px-6 md:px-12'>
       <a href='/'>
-      <img src='/Logo.png' className='border rounded-full w-20 ml-8' />
+      <img src='/Logo.png' className='border rounded-full w-16 md:w-20 ml-4 md:ml-8' />
       </a>
       {/* ternary operator */}
       <div>
