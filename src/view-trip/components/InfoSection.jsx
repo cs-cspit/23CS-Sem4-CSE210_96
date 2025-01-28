@@ -32,10 +32,13 @@ function InfoSection({ trip }) {
     <div className='px-4 sm:px-0'>
       <img src={photourl} className='h-[200px] sm:h-[250px] md:h-[340px] w-full object-cover rounded-xl' />
       <div className='flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 sm:gap-0'>
+
+
         <div className='my-3 sm:my-5 flex flex-col gap-2'>
           <h2 className='font-bold text-xl sm:text-2xl'>
             {trip?.userSelection?.location?.label}
           </h2>
+
           <div className='flex flex-wrap gap-2 sm:gap-5'>
             <h2 className='p-1 px-3 bg-gray-200 rounded-full text-gray-500 text-xs md:text-sm'> 📅 {trip.userSelection?.noOfDays} Day</h2>
             <h2 className='p-1 px-3 bg-gray-200 rounded-full text-gray-500 text-xs md:text-sm'> 💰 {trip.userSelection?.budget} Budget</h2>
@@ -43,23 +46,24 @@ function InfoSection({ trip }) {
           </div>
         </div>
         <div className='self-center sm:self-auto'>
-        {navigator.share ? (
-          <RWebShare
-            data={{
-              text: "Check out my website, AI trip planner!",
-              url: `https://ai-trip-planner-web-orcin.vercel.app/view-trip/${tripId}`,
-              title: "AI Trip Planner"
-            }}
-            onClick={() => console.log("Shared Successfully")}
-          >
-            <Button><IoIosSend /></Button>
-          </RWebShare>
-        ) : (
-          <Button onClick={() => alert("Sharing is not supported on this device.")}>
-            <IoIosSend />
-          </Button>
-        )}
-        </div>
+              {navigator.share ? (
+                <RWebShare
+                  data={{
+                    text: "Check out my website, AI trip planner!",
+                    url: `https://ai-trip-planner-web-orcin.vercel.app/view-trip/${tripId}`,
+                    title: "AI Trip Planner"
+                  }}
+                  onClick={() => console.log("Shared Successfully")}
+                >
+                  <Button><IoIosSend /></Button>
+                </RWebShare>
+              ) : (
+                <Button onClick={() => alert("Sharing is not supported on this device.")}>
+                  <IoIosSend />
+                </Button>
+              )}
+            </div>
+
       </div>
     </div>
   )

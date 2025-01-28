@@ -62,23 +62,28 @@ function Header() {
 
   return (
     <div className='p-3 shadow-sm flex justify-between items-center w-full px-6 md:px-12'>
-      <a href='/'>
-      <img src='/Logo.png' className='border rounded-full w-16 md:w-20 ml-4 md:ml-8' />
-      </a>
+      <div>
+        <a href='/'>
+          <img src='/Logo.png' className='border rounded-full w-16 md:w-20  md:ml-8 sm:w-12' />
+        </a>
+      </div>
       {/* ternary operator */}
       <div>
         {
           user && (
-            <div className='flex items-center gap-3'>
+            <div className='flex items-center gap-3 sm:gap-0'>
+
             <a href='/create-trip'>
             <Button variant="outline" className="rounded-full">+ Create Trip</Button>
             </a>
+
             <a href='/my-trips'>
             <Button variant="outline" className="rounded-full">My Trips</Button>
             </a>
+
             <Popover>
-              <PopoverTrigger>
-              <img src={user?.picture} className='h-[35px] w-[35px] rounded-full' />
+              <PopoverTrigger className='bg-white p-0'>
+              <img src={user?.picture} className=' rounded-full w-12' />
               </PopoverTrigger>
               <PopoverContent>
                 <h2 className='cursor-pointer rounded-lg' onClick={()=>{
