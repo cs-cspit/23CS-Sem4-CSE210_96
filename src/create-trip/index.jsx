@@ -177,7 +177,7 @@ function CreateTrip() {
           ))}
         </div>
       </div>
-      <div className='my-10 justify-end flex'>
+      <div className='my-10 px-20 justify-end flex'>
         <Button 
         disabled={loading}
         onClick={onGenerateTrip}>
